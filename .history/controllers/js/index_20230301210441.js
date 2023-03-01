@@ -104,11 +104,11 @@ getEle('txtTuKhoa').oninput = function () {
     // console.log(tuKhoa);
 
     //toLowerCase();
-    tuKhoa = tuKhoa.toLowerCase();
+    var tuKhoa = tuKhoa.toLowerCase();
 
     //output: mangSInhVienTimKiem = []
     var mangSinhVienTimKiem = [];
-    for (var index = 0; index < mangSinhVien.length; index++) {
+    for (var index = 0; index < mangSinhVien.lenght; index++) {
         //Mỗi lần duyệt lấy ra 1 sinh viên trong mảng
         var sv = mangSinhVien[index];
 

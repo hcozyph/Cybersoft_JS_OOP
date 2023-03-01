@@ -101,25 +101,8 @@ layStore();
 getEle('txtTuKhoa').oninput = function () {
     //input: từ khóa
     var tuKhoa = getEle('txtTuKhoa').value;
-    // console.log(tuKhoa);
 
-    //toLowerCase();
-    tuKhoa = tuKhoa.toLowerCase();
-
-    //output: mangSInhVienTimKiem = []
-    var mangSinhVienTimKiem = [];
-    for (var index = 0; index < mangSinhVien.length; index++) {
-        //Mỗi lần duyệt lấy ra 1 sinh viên trong mảng
-        var sv = mangSinhVien[index];
-
-        //Lấy ra tên so sánh với từ khóa
-        if (sv.tenSinhVien.toLowerCase().search(tuKhoa) !== -1) {
-            //tìm thấy
-            mangSinhVienTimKiem.push(sv);
-        }
-    }
-
-    renderTableSinhVien(mangSinhVienTimKiem);
+    console.log(tuKhoa);
 }
 
 

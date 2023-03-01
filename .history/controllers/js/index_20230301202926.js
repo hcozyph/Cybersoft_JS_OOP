@@ -97,30 +97,19 @@ function layStore() {
 
 layStore();
 
-///--- Đinh nghĩa sự kiện gõ chữ vào ô input
-getEle('txtTuKhoa').oninput = function () {
-    //input: từ khóa
-    var tuKhoa = getEle('txtTuKhoa').value;
-    // console.log(tuKhoa);
 
-    //toLowerCase();
-    tuKhoa = tuKhoa.toLowerCase();
 
-    //output: mangSInhVienTimKiem = []
-    var mangSinhVienTimKiem = [];
-    for (var index = 0; index < mangSinhVien.length; index++) {
-        //Mỗi lần duyệt lấy ra 1 sinh viên trong mảng
-        var sv = mangSinhVien[index];
 
-        //Lấy ra tên so sánh với từ khóa
-        if (sv.tenSinhVien.toLowerCase().search(tuKhoa) !== -1) {
-            //tìm thấy
-            mangSinhVienTimKiem.push(sv);
-        }
-    }
 
-    renderTableSinhVien(mangSinhVienTimKiem);
-}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -222,10 +211,23 @@ getEle('btnLuuThongTin').onclick = function () {
     //Lưu store sau khi thay đổi
     luuLocalStorage();
 
-    ///Lưu xong mới bật 2 nút button#btnThemSinhVien và input#maSinhVien
-    getEle('maSinhVien').disabled = false;
-    getEle('btnThemSinhVien').disabled = false;
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //mangSinhVien.splice(index,1)
@@ -255,30 +257,6 @@ function xoaSinhVienTheoMa(maSVClick) {
     renderTableSinhVien(mangSinhVien);
 }
 //////--END-------CÁCH 2 : LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG---///////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

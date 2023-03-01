@@ -97,30 +97,19 @@ function layStore() {
 
 layStore();
 
-///--- Đinh nghĩa sự kiện gõ chữ vào ô input
-getEle('txtTuKhoa').oninput = function () {
-    //input: từ khóa
-    var tuKhoa = getEle('txtTuKhoa').value;
-    // console.log(tuKhoa);
 
-    //toLowerCase();
-    tuKhoa = tuKhoa.toLowerCase();
 
-    //output: mangSInhVienTimKiem = []
-    var mangSinhVienTimKiem = [];
-    for (var index = 0; index < mangSinhVien.length; index++) {
-        //Mỗi lần duyệt lấy ra 1 sinh viên trong mảng
-        var sv = mangSinhVien[index];
 
-        //Lấy ra tên so sánh với từ khóa
-        if (sv.tenSinhVien.toLowerCase().search(tuKhoa) !== -1) {
-            //tìm thấy
-            mangSinhVienTimKiem.push(sv);
-        }
-    }
 
-    renderTableSinhVien(mangSinhVienTimKiem);
-}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -132,7 +121,7 @@ function renderTableSinhVien(arrSinhVien) {
     for (var index = 0; index < arrSinhVien.length; index++) {
         var sv = arrSinhVien[index];
         htmlString += `
-            <tr class=text-center>
+            <tr>
                 <td>${sv.maSinhVien}</td>
                 <td>${sv.tenSinhVien}</td>
                 <td>${sv.email}</td>
@@ -141,7 +130,6 @@ function renderTableSinhVien(arrSinhVien) {
                 <td>
                 <button class="btn btn-danger" onclick="xoaSinhVien('${index}')">Xóa</button>
                 <button class="btn btn-danger" onclick="xoaSinhVienTheoMa('${sv.maSinhVien}')">Xóa theo mã</button>
-                <button class="btn btn-info mx-2" onclick="layThongTin('${sv.maSinhVien}')">Chỉnh sửa</button>
                 </td>
             </tr>
         `
@@ -150,83 +138,6 @@ function renderTableSinhVien(arrSinhVien) {
     document.querySelector('tbody').innerHTML = htmlString;
     return htmlString; ///'<tr>....</tr>'
 }
-
-
-
-///--- Lấy thông tin ---///
-function layThongTin(maSinhVienClick) {
-    // alert(maSinhVienClick);
-
-    for (var index = 0; index < mangSinhVien.length; index++) {
-        if (mangSinhVien[index].maSinhVien === maSinhVienClick) {
-
-            //in thông tinh sinh viên tìm thấy lên giao diện
-            getEle('maSinhVien').value = mangSinhVien[index].maSinhVien;
-            getEle('tenSinhVien').value = mangSinhVien[index].tenSinhVien;
-            getEle('email').value = mangSinhVien[index].email;
-
-            getEle('soDienThoai').value = mangSinhVien[index].soDienThoai;
-            getEle('loaiSinhVien').value = mangSinhVien[index].loaiSinhVien;
-            getEle('diemRenLuyen').value = mangSinhVien[index].diemRenLuyen;
-
-            getEle('diemToan').value = mangSinhVien[index].diemToan;
-            getEle('diemLy').value = mangSinhVien[index].diemLy;
-            getEle('diemHoa').value = mangSinhVien[index].diemHoa;
-
-            break;
-        }
-    }
-}
-
-
-///--- Lưu thông tin ---///
-getEle('btnLuuThongTin').onclick = function () {
-    //input: lấy thông tin người dùng từ giao diện đưa vào object
-
-    var sinhVienEdit = new SinhVien();
-    sinhVienEdit.maSinhVien = getEle('maSinhVien').value;
-    sinhVienEdit.tenSinhVien = getEle('tenSinhVien').value;
-    sinhVienEdit.email = getEle('email').value;
-
-    sinhVienEdit.soDienThoai = getEle('soDienThoai').value;
-    sinhVienEdit.loaiSinhVien = getEle('loaiSinhVien').value;
-    sinhVienEdit.diemRenLuyen = getEle('diemRenLuyen').value;
-
-    sinhVienEdit.diemToan = getEle('diemToan').value;
-    sinhVienEdit.diemLy = getEle('diemLy').value;
-    sinhVienEdit.diemHoa = getEle('diemHoa').value;
-
-    console.log('sinhvienEdit', sinhVienEdit);
-
-    //Tìm ra sinh viên trong mảng => duyệt mảng lấy mã so sánh
-    for (var index = 0; index < mangSinhVien.length; mangSinhVien++) {
-        if (mangSinhVien[index].maSinhVien === sinhVienEdit.maSinhVien) {
-            //TImf thấy object sinh viên trong mảng => gán các giá trị của object trong mảng = object edit
-            mangSinhVien[index].maSinhVien = sinhVienEdit.maSinhVien;
-            mangSinhVien[index].tenSinhVien = sinhVienEdit.tenSinhVien;
-            mangSinhVien[index].email = sinhVienEdit.email;
-
-            mangSinhVien[index].soDienThoai = sinhVienEdit.soDienThoai;
-            mangSinhVien[index].loaiSinhVien = sinhVienEdit.loaiSinhVien;
-            mangSinhVien[index].diemRenLuyen = sinhVienEdit.diemRenLuyen;
-
-            mangSinhVien[index].diemToan = sinhVienEdit.diemToan;
-            mangSinhVien[index].diemLy = sinhVienEdit.diemLy;
-            mangSinhVien[index].diemHoa = sinhVienEdit.diemHoa;
-            break;
-        }
-    }
-
-    //Gọi hàm render sinh viên dựa trên mảng có phần tử đã thay đổi
-    renderTableSinhVien(mangSinhVien);
-    //Lưu store sau khi thay đổi
-    luuLocalStorage();
-
-    ///Lưu xong mới bật 2 nút button#btnThemSinhVien và input#maSinhVien
-    getEle('maSinhVien').disabled = false;
-    getEle('btnThemSinhVien').disabled = false;
-}
-
 
 //mangSinhVien.splice(index,1)
 function xoaSinhVien(index) {
@@ -255,30 +166,6 @@ function xoaSinhVienTheoMa(maSVClick) {
     renderTableSinhVien(mangSinhVien);
 }
 //////--END-------CÁCH 2 : LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG---///////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
